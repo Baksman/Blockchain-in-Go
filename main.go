@@ -18,7 +18,7 @@ func compress(filename string) error {
 		return err
 	}
 	defer in.Close()
-	out,err := os.Open(filename + ".gz")
+	out,err := os.Create(filename + ".gz")
 	if err!= nil{
 		return err
 	}
@@ -26,10 +26,9 @@ func compress(filename string) error {
 
 
 	gzout := gzip.NewWriter(out)
-	_,err := io.Copy(gzout,in)
+	_,err = io.Copy(gzout,in)
 	gzout.Close()
 
-	retur err
-
+	return err
 
 }
